@@ -20,17 +20,17 @@ import java.util.Map;
 @RestController
 @RequestMapping("/test/user")
 public class TestController extends BaseController {
-    private final static Map<Integer, UserEntity> users = new LinkedHashMap<Integer, UserEntity>();
+    private final static Map<Integer, UserEntity> USERS = new LinkedHashMap<>();
 
-    {
-        users.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
-        users.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
+    static {
+        USERS.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
+        USERS.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
     }
 
     @ApiOperation("获取用户列表")
     @GetMapping("/list")
     public R<List<UserEntity>> userList() {
-        List<UserEntity> userList = new ArrayList<UserEntity>(users.values());
+        List<UserEntity> userList = new ArrayList<UserEntity>(USERS.values());
         return R.ok(userList);
     }
 
@@ -38,8 +38,8 @@ public class TestController extends BaseController {
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path", dataTypeClass = Integer.class)
     @GetMapping("/{userId}")
     public R<UserEntity> getUser(@PathVariable Integer userId) {
-        if (!users.isEmpty() && users.containsKey(userId)) {
-            return R.ok(users.get(userId));
+        if (!USERS.isEmpty() && USERS.containsKey(userId)) {
+            return R.ok(USERS.get(userId));
         } else {
             return R.fail("用户不存在");
         }
@@ -57,7 +57,7 @@ public class TestController extends BaseController {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
             return R.fail("用户ID不能为空");
         }
-        users.put(user.getUserId(), user);
+        USERS.put(user.getUserId(), user);
         return R.ok();
     }
 
@@ -67,11 +67,11 @@ public class TestController extends BaseController {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
             return R.fail("用户ID不能为空");
         }
-        if (users.isEmpty() || !users.containsKey(user.getUserId())) {
+        if (USERS.isEmpty() || !USERS.containsKey(user.getUserId())) {
             return R.fail("用户不存在");
         }
-        users.remove(user.getUserId());
-        users.put(user.getUserId(), user);
+        USERS.remove(user.getUserId());
+        USERS.put(user.getUserId(), user);
         return R.ok();
     }
 
@@ -79,8 +79,8 @@ public class TestController extends BaseController {
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path", dataTypeClass = Integer.class)
     @DeleteMapping("/{userId}")
     public R<String> delete(@PathVariable Integer userId) {
-        if (!users.isEmpty() && users.containsKey(userId)) {
-            users.remove(userId);
+        if (!USERS.isEmpty() && USERS.containsKey(userId)) {
+            USERS.remove(userId);
             return R.ok();
         } else {
             return R.fail("用户不存在");
