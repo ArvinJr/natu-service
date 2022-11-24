@@ -1,8 +1,10 @@
 package com.nt.common.core.domain;
 
 import com.nt.common.constant.HttpStatus;
+import com.nt.common.enums.ResultCodeEnum;
 import com.nt.common.utils.StringUtils;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -10,23 +12,23 @@ import java.util.HashMap;
  *
  * @author 唐僧
  */
-public class AjaxResult extends HashMap<String, Object> {
+public class AjaxResult implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 状态码
      */
-    public static final String CODE_TAG = "code";
+    public int code;
 
     /**
      * 返回内容
      */
-    public static final String MSG_TAG = "msg";
+    public String msg;
 
     /**
      * 数据对象
      */
-    public static final String DATA_TAG = "data";
+    public Object data;
 
     /**
      * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。
@@ -41,8 +43,8 @@ public class AjaxResult extends HashMap<String, Object> {
      * @param msg  返回内容
      */
     public AjaxResult(int code, String msg) {
-        super.put(CODE_TAG, code);
-        super.put(MSG_TAG, msg);
+        this.code = code;
+        this.msg = msg;
     }
 
     /**
@@ -52,12 +54,21 @@ public class AjaxResult extends HashMap<String, Object> {
      * @param msg  返回内容
      * @param data 数据对象
      */
-    public AjaxResult(int code, String msg, Object data) {
-        super.put(CODE_TAG, code);
-        super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data)) {
-            super.put(DATA_TAG, data);
-        }
+    public <T> AjaxResult(int code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public AjaxResult(ResultCodeEnum resultCode) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMessage();
+    }
+
+    public <T> AjaxResult(ResultCodeEnum resultCode, T data) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMessage();
+        this.data = data;
     }
 
     /**
@@ -66,7 +77,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success() {
-        return AjaxResult.success("操作成功");
+        return new AjaxResult(ResultCodeEnum.SUCCESS);
     }
 
     /**
@@ -74,8 +85,8 @@ public class AjaxResult extends HashMap<String, Object> {
      *
      * @return 成功消息
      */
-    public static AjaxResult success(Object data) {
-        return AjaxResult.success("操作成功", data);
+    public static <T> AjaxResult success(T data) {
+        return new AjaxResult(ResultCodeEnum.SUCCESS, data);
     }
 
     /**
@@ -95,17 +106,17 @@ public class AjaxResult extends HashMap<String, Object> {
      * @param data 数据对象
      * @return 成功消息
      */
-    public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(HttpStatus.SUCCESS, msg, data);
+    public static <T> AjaxResult success(String msg, T data) {
+        return new AjaxResult(ResultCodeEnum.SUCCESS.getCode(), msg, data);
     }
 
     /**
      * 返回错误消息
      *
-     * @return
+     * @return 警告消息
      */
     public static AjaxResult error() {
-        return AjaxResult.error("操作失败");
+        return new AjaxResult(ResultCodeEnum.ERROR);
     }
 
     /**
@@ -121,12 +132,23 @@ public class AjaxResult extends HashMap<String, Object> {
     /**
      * 返回错误消息
      *
+     * @param data 返回数据
+     * @param <T> 数据类型
+     * @return 警告消息
+     */
+    public static <T> AjaxResult error(T data) {
+        return new AjaxResult(ResultCodeEnum.ERROR, data);
+    }
+
+    /**
+     * 返回错误消息
+     *
      * @param msg  返回内容
      * @param data 数据对象
      * @return 警告消息
      */
-    public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(HttpStatus.ERROR, msg, data);
+    public static<T> AjaxResult error(String msg, T data) {
+        return new AjaxResult(ResultCodeEnum.ERROR.getCode(), msg, data);
     }
 
     /**
@@ -141,15 +163,37 @@ public class AjaxResult extends HashMap<String, Object> {
     }
 
     /**
-     * 方便链式调用
+     * 返回错误消息
      *
-     * @param key   键
-     * @param value 值
-     * @return 数据对象
+     * @param code 状态码
+     * @param msg  返回内容
+     * @param data 数据对象
+     * @param <T>  数据类型
+     * @return 警告消息
      */
-    @Override
-    public AjaxResult put(String key, Object value) {
-        super.put(key, value);
-        return this;
+    public static <T> AjaxResult error(int code, String msg, T data) {
+        return new AjaxResult(code, msg, data);
+    }
+
+    /**
+     * 返回错误消息
+     *
+     * @param resultCode 消息码
+     * @return 警告消息
+     */
+    public static AjaxResult error(ResultCodeEnum resultCode) {
+        return AjaxResult.error(resultCode, null);
+    }
+
+    /**
+     * 返回错误信息
+     *
+     * @param resultCode 消息码
+     * @param data       数据对象
+     * @param <T>        数据类型
+     * @return 警告消息
+     */
+    public static <T> AjaxResult error(ResultCodeEnum resultCode, T data) {
+        return new AjaxResult(resultCode, data);
     }
 }
