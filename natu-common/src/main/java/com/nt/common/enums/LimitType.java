@@ -6,8 +6,7 @@ package com.nt.common.enums;
  * @author 唐僧
  */
 
-public enum LimitType
-{
+public enum LimitType {
     /**
      * 默认策略全局限流
      */

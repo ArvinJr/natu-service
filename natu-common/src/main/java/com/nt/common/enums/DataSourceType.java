@@ -2,11 +2,10 @@ package com.nt.common.enums;
 
 /**
  * 数据源
- * 
+ *
  * @author 唐僧
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

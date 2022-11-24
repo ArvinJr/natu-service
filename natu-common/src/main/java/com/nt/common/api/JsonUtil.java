@@ -12,13 +12,19 @@ import org.slf4j.LoggerFactory;
 public class JsonUtil {
     private static final Logger log = LoggerFactory.getLogger(JsonUtil.class);
 
-    /** 状态码 */
+    /**
+     * 状态码
+     */
     public static final String CODE_TAG = "code";
 
-    /** 返回内容 */
+    /**
+     * 返回内容
+     */
     public static final String MSG_TAG = "msg";
 
-    /** 数据对象 */
+    /**
+     * 数据对象
+     */
     public static final String DATA_TAG = "data";
 
     private JsonUtil() {
@@ -26,14 +32,15 @@ public class JsonUtil {
 
     /**
      * 校验json
+     *
      * @param text 待校验文本
      * @return
      */
-    public static Boolean verifyJson(String text){
+    public static Boolean verifyJson(String text) {
         try {
             JSON.parseObject(text);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("不正确的json字符串");
             return false;
         }
@@ -41,63 +48,68 @@ public class JsonUtil {
 
     /**
      * 转json
+     *
      * @param text 待转换文本
      * @return JSONObject
      */
-    public static JSONObject parseObject(String text){
+    public static JSONObject parseObject(String text) {
         try {
             return JSON.parseObject(text);
-        }catch (Exception e){
-            log.error("不正确的json字符串==>{}",text);
+        } catch (Exception e) {
+            log.error("不正确的json字符串==>{}", text);
             return null;
         }
     }
 
     /**
      * 初始化一个 JSONObject
+     *
      * @return JSONObject
      */
-    public static JSONObject newJSONObject(){
+    public static JSONObject newJSONObject() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(CODE_TAG,200);
-        jsonObject.put(MSG_TAG,"请求成功");
+        jsonObject.put(CODE_TAG, 200);
+        jsonObject.put(MSG_TAG, "请求成功");
         return jsonObject;
     }
 
     /**
      * 请求成功
+     *
      * @param msg 提示信息
      * @return JSONObject
      */
-    public static JSONObject success(String msg){
+    public static JSONObject success(String msg) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(CODE_TAG,200);
-        jsonObject.put(MSG_TAG,msg);
+        jsonObject.put(CODE_TAG, 200);
+        jsonObject.put(MSG_TAG, msg);
         return jsonObject;
     }
 
     /**
      * 请求成功
+     *
      * @param data 返回数据
      * @return JSONObject
      */
-    public static JSONObject success(Object data){
+    public static JSONObject success(Object data) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(CODE_TAG,200);
-        jsonObject.put(MSG_TAG,"请求成功");
-        jsonObject.put(DATA_TAG,data);
+        jsonObject.put(CODE_TAG, 200);
+        jsonObject.put(MSG_TAG, "请求成功");
+        jsonObject.put(DATA_TAG, data);
         return jsonObject;
     }
 
     /**
      * 请求失败
+     *
      * @param msg 提示信息
      * @return JSONObject
      */
-    public static JSONObject fail(String msg){
+    public static JSONObject fail(String msg) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(CODE_TAG,500);
-        jsonObject.put(MSG_TAG,msg);
+        jsonObject.put(CODE_TAG, 500);
+        jsonObject.put(MSG_TAG, msg);
         return jsonObject;
     }
 }

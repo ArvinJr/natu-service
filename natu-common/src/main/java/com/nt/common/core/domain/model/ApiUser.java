@@ -4,16 +4,22 @@ import java.io.Serializable;
 
 /**
  * @Author: 唐僧
- * @Desc: 
+ * @Desc:
  */
 public class ApiUser implements Serializable {
     private static final long serialVersionUID = 768788313972112861L;
 
-    /**登录人联系方式*/
+    /**
+     * 登录人联系方式
+     */
     private String userPhone;
-    /**登录名*/
+    /**
+     * 登录名
+     */
     private String loginName;
-    /**登录密码*/
+    /**
+     * 登录密码
+     */
     private String password;
 
 
@@ -40,7 +46,7 @@ public class ApiUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     @Override
     public String toString() {
         return "AppUser{" +

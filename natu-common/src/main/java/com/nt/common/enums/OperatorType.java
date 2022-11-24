@@ -2,11 +2,10 @@ package com.nt.common.enums;
 
 /**
  * 操作人类别
- * 
+ *
  * @author 唐僧
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

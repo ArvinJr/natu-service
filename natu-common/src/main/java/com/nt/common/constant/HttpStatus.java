@@ -2,11 +2,10 @@ package com.nt.common.constant;
 
 /**
  * 返回状态码
- * 
+ *
  * @author 唐僧
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */

@@ -1,9 +1,5 @@
 package com.nt.system.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.nt.common.constant.UserConstants;
 import com.nt.common.exception.ServiceException;
 import com.nt.common.utils.StringUtils;
@@ -11,6 +7,10 @@ import com.nt.system.domain.SysPost;
 import com.nt.system.mapper.SysPostMapper;
 import com.nt.system.mapper.SysUserPostMapper;
 import com.nt.system.service.ISysPostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 岗位信息 服务层处理

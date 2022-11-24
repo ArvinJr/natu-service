@@ -100,14 +100,15 @@ public class QrCodeUtils {
 
     /**
      * 生成二维码--方法1
-     * @param content 存放在二维码中的内容
-     * @param imgPath logo的路径及名称
-     * @param destPath 生成的二维码的路径
+     *
+     * @param content      存放在二维码中的内容
+     * @param imgPath      logo的路径及名称
+     * @param destPath     生成的二维码的路径
      * @param needCompress 是否需要压缩
      * @return 生成的二维码的名称
      * @throws Exception
      */
-    public static String encode(String content, String imgPath, String destPath, boolean needCompress){
+    public static String encode(String content, String imgPath, String destPath, boolean needCompress) {
         BufferedImage image;
         try {
             image = createImage(content, imgPath, needCompress);
@@ -118,7 +119,7 @@ public class QrCodeUtils {
             return qrPath;*/
 
             //若destPath带有文件名
-            File file=new File(destPath);
+            File file = new File(destPath);
             ImageIO.write(image, FORMAT_NAME, file);
             return file.getName();
         } catch (Exception e) {
@@ -137,8 +138,9 @@ public class QrCodeUtils {
 
     /**
      * 生成二维码
-     * @param content 存放在二维码中的内容
-     * @param imgPath logo的路径及名称
+     *
+     * @param content      存放在二维码中的内容
+     * @param imgPath      logo的路径及名称
      * @param needCompress 是否需要压缩
      * @return
      * @throws Exception
@@ -151,8 +153,9 @@ public class QrCodeUtils {
     /**
      * 生成二维码
      * 不需要压缩
-     * @param content 存放在二维码中的内容
-     * @param imgPath logo的路径及名称
+     *
+     * @param content  存放在二维码中的内容
+     * @param imgPath  logo的路径及名称
      * @param destPath 生成的二维码的路径
      * @throws Exception
      */
@@ -164,7 +167,8 @@ public class QrCodeUtils {
     /**
      * 生成二维码
      * 无logo，不需要压缩
-     * @param content 存放在二维码中的内容
+     *
+     * @param content  存放在二维码中的内容
      * @param destPath 生成的二维码的路径
      * @throws Exception
      */
@@ -176,9 +180,10 @@ public class QrCodeUtils {
     /**
      * 生成二维码--方法2
      * 无输出路径
-     * @param content 存放在二维码中的内容
-     * @param imgPath logo的路径及名称
-     * @param output 输出流
+     *
+     * @param content      存放在二维码中的内容
+     * @param imgPath      logo的路径及名称
+     * @param output       输出流
      * @param needCompress 是否需要压缩
      * @throws Exception
      */
@@ -191,8 +196,9 @@ public class QrCodeUtils {
     /**
      * 生成二维码
      * 无logo,无生成路径，不需要压缩
+     *
      * @param content 存放在二维码中的内容
-     * @param output 输出流
+     * @param output  输出流
      * @throws Exception
      */
     public static void encode(String content, OutputStream output) throws Exception {
@@ -201,6 +207,7 @@ public class QrCodeUtils {
 
     /**
      * 根据二维码路径解析二维码
+     *
      * @param path
      * @return java.lang.String
      */
@@ -210,6 +217,7 @@ public class QrCodeUtils {
 
     /**
      * 根据二维码解析二维码
+     *
      * @param file
      * @return java.lang.String
      */
@@ -229,14 +237,15 @@ public class QrCodeUtils {
 
     /**
      * 初始化二维码 MultipartFile
-     * @param content 二维码内容
+     *
+     * @param content  二维码内容
      * @param logoPath logo路径
      * @return
      * @throws Exception
      */
-    private static MultipartFile initMultipartFile(String content, String logoPath) throws Exception{
+    private static MultipartFile initMultipartFile(String content, String logoPath) throws Exception {
         //二维码名称
-        String qrName="qr"+System.currentTimeMillis()+".jpg";
+        String qrName = "qr" + System.currentTimeMillis() + ".jpg";
         //得到BufferedImage对象
         BufferedImage bufferedImage = createImage(content, logoPath, true);
         //创建一个ByteArrayOutputStream
@@ -251,8 +260,9 @@ public class QrCodeUtils {
 
     /**
      * 生成二维码（有logo）
-     * @param jsonString  二维码内容  JSON字符串
-     * @param logoPath logo路径
+     *
+     * @param jsonString 二维码内容  JSON字符串
+     * @param logoPath   logo路径
      * @return
      */
     public static MultipartFile createQrCode(String jsonString, String logoPath) throws Exception {
@@ -262,7 +272,8 @@ public class QrCodeUtils {
 
     /**
      * 生成二维码（无logo）
-     * @param jsonString  二维码内容  JSON字符串
+     *
+     * @param jsonString 二维码内容  JSON字符串
      * @return
      */
     public static MultipartFile createQrCode(String jsonString) throws Exception {

@@ -15,21 +15,22 @@ import java.math.BigDecimal;
 public class PicUtils {
 
     public static void main(String[] args) {
-
+        // 图片小于1000kb
         PicUtils.compressPicForScale("C:\\Users\\Li\\Downloads\\test.jpeg", "C:\\Users\\Li\\Downloads\\test1.jpeg",
-                100, 0.8, 2560, 1440); // 图片小于1000kb
+                100, 0.8, 2560, 1440);
 
     }
 
     /**
      * 压缩图片通用方法(仅适用于数据库数据格式为 例:/profile/upload/2022/10/26/活动1.2_20221026171704A003.png)
-     * @param pictureUrl 图片url
-     * @param pictureUrl 系统存储路径
-     * @param desMaxWidth 宽度
+     *
+     * @param pictureUrl   图片url
+     * @param pictureUrl   系统存储路径
+     * @param desMaxWidth  宽度
      * @param desMaxHeight 高度
      * @return compressPicture 返回的图片路径(本地当中的路径)
      */
-    public String compressPicture (String pictureUrl, String profile, int desMaxWidth, int desMaxHeight) {
+    public String compressPicture(String pictureUrl, String profile, int desMaxWidth, int desMaxHeight) {
         // 分割入参url
         String[] urls = pictureUrl.split("/");
         // 拼接图片url
@@ -54,7 +55,6 @@ public class PicUtils {
     }
 
 
-
     /**
      * 根据指定大小和指定精度压缩图片
      *
@@ -76,7 +76,7 @@ public class PicUtils {
             File srcFile = new File(srcPath);
             long srcFileSize = srcFile.length();
             System.out.println("源图片：" + srcPath + "，大小：" + srcFileSize / 1024 + "kb");
-            if (srcFileSize/1024 <= desFileSize) {
+            if (srcFileSize / 1024 <= desFileSize) {
                 return srcPath;
             }
             //获取图片信息

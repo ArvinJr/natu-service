@@ -2,12 +2,10 @@ package com.nt.common.enums;
 
 /**
  * 操作状态
- * 
- * @author 唐僧
  *
+ * @author 唐僧
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

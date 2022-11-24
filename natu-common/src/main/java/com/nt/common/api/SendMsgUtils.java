@@ -60,7 +60,7 @@ public class SendMsgUtils {
      */
     private static final String TEMPLATE_ID = "e8d8835e651a47168a8ee7fd162f8d6b";
     /**
-     *  签名名称
+     * 签名名称
      * 条件必填,国内短信关注,当templateId指定的模板类型为通用模板时生效且必填,必须是已审核通过的,与模板类型一致的签名名称
      * 国际/港澳台短信不用关注该参数
      */
@@ -73,13 +73,14 @@ public class SendMsgUtils {
 
     /**
      * 发送短信验证码
+     *
      * @param receiver 接收人
-     * @param code 验证码
+     * @param code     验证码
      * @return java.lang.String
      */
-    public static String sendSmsCode(String receiver,String code) throws Exception{
+    public static String sendSmsCode(String receiver, String code) throws Exception {
         //模板变量
-        String templateParas = "[\""+code+"\"]";
+        String templateParas = "[\"" + code + "\"]";
 
         //请求Body,不携带签名名称时,signature请填null
         String body = buildRequestBody(receiver, TEMPLATE_ID, templateParas, SIGNATURE);
@@ -111,9 +112,9 @@ public class SendMsgUtils {
         log.info(result);
         JSONObject jsonObject = JSON.parseObject(result);
         String status = jsonObject.getString("code");
-        log.info("code:{}",jsonObject.getString("code"));
-        if(SUCCESS_CODE.equals(status)){
-            log.info("短信发送成功-->验证码:{}",code);
+        log.info("code:{}", jsonObject.getString("code"));
+        if (SUCCESS_CODE.equals(status)) {
+            log.info("短信发送成功-->验证码:{}", code);
             return code;
         }
         return null;
@@ -121,10 +122,11 @@ public class SendMsgUtils {
 
     /**
      * 构造请求Body体
-     * @param receiver 接收者
-     * @param templateId 模板id
-     * @param templateParas  模板变量
-     * @param signature | 签名名称,使用国内短信通用模板时填写
+     *
+     * @param receiver      接收者
+     * @param templateId    模板id
+     * @param templateParas 模板变量
+     * @param signature     | 签名名称,使用国内短信通用模板时填写
      * @return 请求Body体
      */
     private static String buildRequestBody(String receiver, String templateId, String templateParas, String signature) {
@@ -148,6 +150,7 @@ public class SendMsgUtils {
 
     /**
      * 构造X-WSSE参数值
+     *
      * @return 请求Headers中的X-WSSE参数值
      */
     private static String buildWsseHeader() {
@@ -170,6 +173,7 @@ public class SendMsgUtils {
 
     /**
      * 生成随机的6为验证码
+     *
      * @return
      */
     public static String getMsgCode() {
