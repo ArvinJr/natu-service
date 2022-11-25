@@ -1,4 +1,4 @@
-package com.nt.common.api;
+package com.nt.common.utils.api;
 
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;

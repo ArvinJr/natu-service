@@ -1,4 +1,4 @@
-package com.nt.common.api;
+package com.nt.common.utils.api;
 
 import net.coobird.thumbnailator.Thumbnails;
 

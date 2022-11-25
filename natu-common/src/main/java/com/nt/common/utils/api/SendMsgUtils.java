@@ -1,4 +1,4 @@
-package com.nt.common.api;
+package com.nt.common.utils.api;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
