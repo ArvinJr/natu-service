@@ -1,11 +1,8 @@
 package com.nt.common.core.domain;
 
-import com.nt.common.constant.HttpStatus;
-import com.nt.common.enums.ResultCodeEnum;
-import com.nt.common.utils.StringUtils;
+import com.nt.common.enums.ResultCode;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * 操作消息提醒
@@ -13,7 +10,6 @@ import java.util.HashMap;
  * @author 唐僧
  */
 public class AjaxResult implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     /**
      * 状态码
@@ -60,12 +56,12 @@ public class AjaxResult implements Serializable {
         this.data = data;
     }
 
-    public AjaxResult(ResultCodeEnum resultCode) {
+    public AjaxResult(ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMessage();
     }
 
-    public <T> AjaxResult(ResultCodeEnum resultCode, T data) {
+    public <T> AjaxResult(ResultCode resultCode, T data) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMessage();
         this.data = data;
@@ -77,7 +73,7 @@ public class AjaxResult implements Serializable {
      * @return 成功消息
      */
     public static AjaxResult success() {
-        return new AjaxResult(ResultCodeEnum.SUCCESS);
+        return new AjaxResult(ResultCode.OK);
     }
 
     /**
@@ -86,7 +82,7 @@ public class AjaxResult implements Serializable {
      * @return 成功消息
      */
     public static <T> AjaxResult success(T data) {
-        return new AjaxResult(ResultCodeEnum.SUCCESS, data);
+        return new AjaxResult(ResultCode.SUCCESS, data);
     }
 
     /**
@@ -107,7 +103,7 @@ public class AjaxResult implements Serializable {
      * @return 成功消息
      */
     public static <T> AjaxResult success(String msg, T data) {
-        return new AjaxResult(ResultCodeEnum.SUCCESS.getCode(), msg, data);
+        return new AjaxResult(ResultCode.SUCCESS.getCode(), msg, data);
     }
 
     /**
@@ -116,7 +112,7 @@ public class AjaxResult implements Serializable {
      * @return 警告消息
      */
     public static AjaxResult error() {
-        return new AjaxResult(ResultCodeEnum.ERROR);
+        return new AjaxResult(ResultCode.ERROR);
     }
 
     /**
@@ -137,7 +133,7 @@ public class AjaxResult implements Serializable {
      * @return 警告消息
      */
     public static <T> AjaxResult error(T data) {
-        return new AjaxResult(ResultCodeEnum.ERROR, data);
+        return new AjaxResult(ResultCode.ERROR, data);
     }
 
     /**
@@ -148,7 +144,7 @@ public class AjaxResult implements Serializable {
      * @return 警告消息
      */
     public static<T> AjaxResult error(String msg, T data) {
-        return new AjaxResult(ResultCodeEnum.ERROR.getCode(), msg, data);
+        return new AjaxResult(ResultCode.ERROR.getCode(), msg, data);
     }
 
     /**
@@ -181,7 +177,7 @@ public class AjaxResult implements Serializable {
      * @param resultCode 消息码
      * @return 警告消息
      */
-    public static AjaxResult error(ResultCodeEnum resultCode) {
+    public static AjaxResult error(ResultCode resultCode) {
         return AjaxResult.error(resultCode, null);
     }
 
@@ -193,7 +189,7 @@ public class AjaxResult implements Serializable {
      * @param <T>        数据类型
      * @return 警告消息
      */
-    public static <T> AjaxResult error(ResultCodeEnum resultCode, T data) {
+    public static <T> AjaxResult error(ResultCode resultCode, T data) {
         return new AjaxResult(resultCode, data);
     }
 }

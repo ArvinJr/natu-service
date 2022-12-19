@@ -1,6 +1,6 @@
 package com.nt.common.exception.base;
 
-import com.nt.common.enums.ResultCodeEnum;
+import com.nt.common.enums.ResultCode;
 import com.nt.common.utils.MessageUtils;
 import com.nt.common.utils.StringUtils;
 
@@ -39,8 +39,8 @@ public class BaseException extends RuntimeException {
         this.defaultMessage = defaultMessage;
     }
 
-    public BaseException(String module, ResultCodeEnum resultCodeEnum, Object[] args) {
-        this(module, resultCodeEnum.getCode().toString(), args, resultCodeEnum.getMessage());
+    public BaseException(String module, ResultCode resultCode, Object[] args) {
+        this(module, resultCode.getCode().toString(), args, resultCode.getMessage());
     }
 
     public BaseException(String module, String code, Object[] args) {
@@ -59,16 +59,16 @@ public class BaseException extends RuntimeException {
         this(null, null, null, defaultMessage);
     }
 
-    public BaseException(ResultCodeEnum resultCodeEnum) {
-        this(null, resultCodeEnum, null);
+    public BaseException(ResultCode resultCode) {
+        this(null, resultCode, null);
     }
 
-    public BaseException(ResultCodeEnum resultCodeEnum, Object[] args) {
-        this(null, resultCodeEnum, args);
+    public BaseException(ResultCode resultCode, Object[] args) {
+        this(null, resultCode, args);
     }
 
-    public BaseException(String module, ResultCodeEnum resultCodeEnum) {
-        this(module, resultCodeEnum, null);
+    public BaseException(String module, ResultCode resultCode) {
+        this(module, resultCode, null);
     }
 
     @Override
